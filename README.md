@@ -1,3 +1,213 @@
+# Encapsulation di Java
+
+Dokumen ini menjelaskan konsep **Encapsulation** di Java menggunakan contoh kode. **Encapsulation** adalah teknik untuk menyembunyikan detail implementasi dengan membuat atribut kelas bersifat `private` dan memberikan akses melalui metode `getter` dan `setter`.
+
+---
+
+## **Kode Contoh**
+
+```java
+class Employee {
+
+    private String name;
+    private int age;
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getAge() {
+        return age;
+    }
+
+    public void setAge(int age) {
+        if (age > 0) {
+            this.age = age;
+        } else {
+            System.out.println("Age must be positive!");
+        }
+    }
+}
+
+public class Main {
+    public static void main(String[] args) {
+        Employee employee1 = new Employee();
+        Employee employee2 = new Employee();
+
+        employee1.setName("Michael");
+        employee1.setAge(21);
+
+        employee2.setName("Rian");
+        employee2.setAge(22);
+
+        System.out.println("Name : " + employee1.getName());
+        System.out.println("Age: " + employee1.getAge());
+
+        System.out.println("Name : " + employee2.getName());
+        System.out.println("Age: " + employee2.getAge());
+    }
+}
+```
+
+---
+
+## **Penjelasan Baris per Baris**
+
+### **1. Deklarasi Kelas Employee**
+
+```java
+class Employee {
+```
+
+* Membuat kelas `Employee` sebagai **model** data karyawan.
+
+### **2. Atribut Private**
+
+```java
+private String name;
+private int age;
+```
+
+* Atribut `name` dan `age` diberi modifier **private**, sehingga **tidak bisa diakses langsung** dari luar kelas.
+* Hal ini adalah inti dari **encapsulation**.
+
+### **3. Getter dan Setter**
+
+#### **Getter untuk name**
+
+```java
+public String getName() {
+    return name;
+}
+```
+
+* Mengambil nilai `name` dari objek.
+
+#### **Setter untuk name**
+
+```java
+public void setName(String name) {
+    this.name = name;
+}
+```
+
+* Mengatur nilai `name`.
+* Kata kunci `this` digunakan untuk membedakan **variabel instance** dan **parameter metode**.
+
+#### **Getter untuk age**
+
+```java
+public int getAge() {
+    return age;
+}
+```
+
+* Mengambil nilai `age`.
+
+#### **Setter untuk age dengan Validasi**
+
+```java
+public void setAge(int age) {
+    if (age > 0) {
+        this.age = age;
+    } else {
+        System.out.println("Age must be positive!");
+    }
+}
+```
+
+* Mengatur nilai `age` **hanya jika** nilainya positif.
+* Jika nilai tidak valid, program akan mencetak pesan kesalahan.
+
+### **4. Kelas Main**
+
+```java
+public class Main {
+    public static void main(String[] args) {
+```
+
+* Kelas utama tempat program dijalankan.
+
+```java
+Employee employee1 = new Employee();
+Employee employee2 = new Employee();
+```
+
+* Membuat **dua objek** `Employee` berbeda: `employee1` dan `employee2`.
+
+```java
+employee1.setName("Michael");
+employee1.setAge(21);
+
+employee2.setName("Rian");
+employee2.setAge(22);
+```
+
+* Mengatur nama dan umur masing-masing karyawan menggunakan metode **setter**.
+
+```java
+System.out.println("Name : " + employee1.getName());
+System.out.println("Age: " + employee1.getAge());
+
+System.out.println("Name : " + employee2.getName());
+System.out.println("Age: " + employee2.getAge());
+```
+
+* Mengambil dan menampilkan nama dan umur karyawan menggunakan metode **getter**.
+
+---
+
+## **Konsep yang Ditunjukkan**
+
+| Konsep            | Penjelasan                                                                  |
+| ----------------- | --------------------------------------------------------------------------- |
+| **Encapsulation** | Menyembunyikan detail implementasi dengan atribut `private`.                |
+| **Getter**        | Metode untuk mengambil nilai dari atribut privat.                           |
+| **Setter**        | Metode untuk mengatur nilai atribut privat dengan kontrol validasi.         |
+| **Validasi Data** | Pada `setAge()`, nilai umur tidak bisa negatif atau nol.                    |
+| **Reusability**   | Kelas dapat digunakan berkali-kali untuk membuat objek dengan data berbeda. |
+
+---
+
+## **Output Program**
+
+```
+Name : Michael
+Age: 21
+Name : Rian
+Age: 22
+```
+
+Jika kita mencoba memberikan nilai umur negatif, misalnya:
+
+```java
+employee1.setAge(-5);
+```
+
+**Outputnya akan:**
+
+```
+Age must be positive!
+```
+
+---
+
+## **Kesimpulan**
+
+* **Encapsulation** melindungi data dengan membuat atribut menjadi `private`.
+* Akses dan modifikasi dilakukan melalui **getter** dan **setter**.
+* Validasi data bisa dilakukan dalam **setter** agar nilai atribut selalu konsisten.
+
+---
+
+📌 **Catatan:**
+Encapsulation biasanya digunakan bersama dengan **abstraction**, **inheritance**, dan **polymorphism** untuk menerapkan prinsip **OOP** secara penuh di Java.
+
+
 # Abstraction di Java
 
 Dokumen ini menjelaskan konsep **Abstraction** di Java menggunakan contoh kode. Abstraksi adalah proses menyembunyikan detail implementasi dan hanya menampilkan fungsionalitas penting kepada pengguna.
@@ -191,3 +401,5 @@ Sleeping...
 * Membantu menciptakan kode yang **lebih rapi**, **terstruktur**, dan **mudah diperluas**.
 
 ---
+📌 Catatan:
+Jika ingin mengimplementasikan banyak metode abstrak sekaligus, Anda juga bisa menggunakan interface di Java, tetapi perbedaan dan penggunaannya tergantung pada kebutuhan desain.
